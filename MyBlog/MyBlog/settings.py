@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import logging
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -106,7 +107,48 @@ CACHES = {
     }
 }
 
-
+LOGGING = {
+    # 版本
+    'version': 1,
+    # 是否禁用已存在的日志器
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(lineno)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(module)s %(lineno)d %(message)s'
+        },
+    },
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, "logs/dj_youkou.log"),  # 日志文件的位置
+            'maxBytes': 300 * 1024 * 1024,
+            'backupCount': 10,
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'django': {  # 定义了一个名为django的日志器
+            'handlers': ['console', 'file'],
+            'propagate': True,
+            'level': 'INFO',  # 日志器接收的最低日志级别
+        },
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
