@@ -103,7 +103,7 @@ DATABASES = {
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://172.18.19.162:6379/0",
+        "LOCATION": "redis://192.168.1.109:6379/0",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
             # "CONNECTION_POOL_KWARGS": {"max_connections": 100}
@@ -112,7 +112,7 @@ CACHES = {
     },
     "verify_codes": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://172.18.19.162:6379/1",
+        "LOCATION": "redis://192.168.1.109:6379/1",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
             # "CONNECTION_POOL_KWARGS": {"max_connections": 100}
