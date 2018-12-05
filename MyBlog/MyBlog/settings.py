@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'news',
     'doc',
     'course',
-    'users'
+    'users',
+    'verifications',
 ]
 
 MIDDLEWARE = [
@@ -102,7 +103,16 @@ DATABASES = {
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://192.168.1.109:6379",
+        "LOCATION": "redis://172.18.19.162:6379/0",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            # "CONNECTION_POOL_KWARGS": {"max_connections": 100}
+            # "PASSWORD": "密码",
+        }
+    },
+    "verify_codes": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://172.18.19.162:6379/1",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
             # "CONNECTION_POOL_KWARGS": {"max_connections": 100}
